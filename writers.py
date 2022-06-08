@@ -8,12 +8,12 @@ import pandas as pd
 
 
 
-def wr_team_summary(data,basefolder):
+def wr_team_summary(data):
     """
-    Creates a csv file with team history.
+    Creates a csv file with a team's gameweek history.
     """
     gw_history_df = pd.DataFrame.from_records(data["current"])
-    gw_history_df.to_csv(os.path.join(basefolder, 'history.csv'), index=False)
+    gw_history_df.to_csv(os.path.join(getcwd, 'history.csv'), index=False)
 
 def wr_player_summary(data,basefolder):
     """
