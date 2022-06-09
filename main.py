@@ -1,5 +1,12 @@
 from scrapers import *
+from sorters import *
 from writers import *
 
-data = scr_team_summary(185134)
-print(data)
+print("getting Data")
+data = scr_data()
+
+print("Making player data")
+wr_player_data(data)
+
+print("IDing Players")
+ID_Players()

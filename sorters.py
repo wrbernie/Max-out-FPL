@@ -37,7 +37,7 @@ def ID_Players():
     Args: The Raw data file that includes all data for the whole game"""
 
     headers = ['first_name', 'second_name', 'id']
-    fin = open(os.getcwd() + '/Data/Seasons/22/player_data_raw.csv', 'r+', encoding='utf-8')
+    fin = open(os.getcwd() + '/Data/Seasons/22/playerdata.csv', 'r+', encoding='utf-8')
     outname = os.getcwd() + '/data/seasons/22/player_ids.csv'
     
     fout = open(outname, 'w+', encoding='utf-8', newline='')

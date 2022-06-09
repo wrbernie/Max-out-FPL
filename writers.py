@@ -42,11 +42,11 @@ def wr_gw_data(data,basefolder,gw):
     gw_data_df = pd.DataFrame.from_records(data["elements"])
     gw_data_df.to_csv(os.path.join(basefolder, 'gw' + str(gw) + '.csv'), index = False)
 
-def wr_data(data):
-    """ Puts the whole data into a csv text file 
+def wr_player_data(data):
+    """ Puts player data into a csv file
     """
     fulldata_df = pd.DataFrame.from_records(data["elements"])
-    fulldata_df.to_csv(os.path.join(os.getcwd(),'data/fulldata.csv'))
+    fulldata_df.to_csv(os.path.join(os.getcwd(), 'data/seasons/22/playerdata.csv'))
 
 
 def main():
@@ -58,7 +58,7 @@ def main():
     #     os.makedirs(folder_name)
     #     print("here")
 
-    wr_data(data)
+    wr_player_data(data)
 
     print("ending")
 
