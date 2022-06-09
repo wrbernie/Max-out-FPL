@@ -4,6 +4,17 @@ import requests
 import json
 import time
 
+def scr_data():
+    """
+    Gets the fpl player data from database
+    """
+    response = requests.get("https://fantasy.premierleague.com/api/bootstrap-static/")
+    if response.status_code != 200:
+        raise Exception("Response was code " + str(response.status_code))
+    responseStr = response.text
+    data = json.loads(responseStr)
+    return data
+
 def scr_team_summary(entry_id):
     """ Retrieve the summary/history data for a specific entry/team
     Args:
@@ -85,10 +96,31 @@ def scr_gw_live(gw):
     data = json.loads(response.text)
     return(data)
 
+def scr_team_transfers(entry_id):
+    """This function scrapes for a teams transfers throught the season
+
+    Args:
+        entry_id (int): The teamID that will be scraped
+        returns: csv file with player transfers
+    """
+    base_url = "https://fantasy.premierleague.com/api/entry/"
+    full_url = base_url + str(entry_id) + "/transfers/"
+    response = ''
+    while response == '':
+        try:
+            response = requests.get(full_url)
+        except:
+            time.sleep(5)
+    if response.status_code != 200:
+        raise Exception("Response was code " + str(response.status_code))
+    data = json.loads(response.text)
+    return data
+
 def main():
-    ID = 233
-    gw = 1
-    print(scr_team_gw(ID,gw)["picks"])
+
+    ID = 185134
+    
+    print(scr_team_transfers(ID))
     
 
 if __name__ == "__main__":
