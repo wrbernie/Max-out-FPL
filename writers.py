@@ -29,16 +29,18 @@ def wr_player_summary(data,basefolder):
     player_summary_df = pd.DataFrame.from_records(data["history"])
     player_summary_df.to_csv(os.path.join(basefolder, 'salah.csv'), index=False)
 
-def wr_team_gw(data,basefolder,gw):
+def wr_gw_picks(data,gw):
     """
     Creates a csv file with team data of a specific gameweek.
     """
+    basefolder = os.getcwd() + "/data/managers/willie/22/gameweeks/"
     team_gw_df = pd.DataFrame.from_records(data["picks"])
     team_gw_df.to_csv(os.path.join(basefolder, str(gw) + '.csv'), index=False)
 
-def wr_gw_data(data,basefolder,gw):
+def wr_gw_live(data,gw):
     """creates a csv for a specific gameweek
     """
+    basefolder = os.getcwd() + '/data/seasons/22/gameweeks/'
     gw_data_df = pd.DataFrame.from_records(data["elements"])
     gw_data_df.to_csv(os.path.join(basefolder, 'gw' + str(gw) + '.csv'), index = False)
 
@@ -52,13 +54,9 @@ def wr_player_data(data):
 def main():
     print('starting')
 
-    data = scr_data()
-    
-    # if not os.path.exists(folder_name):
-    #     os.makedirs(folder_name)
-    #     print("here")
-
-    wr_player_data(data)
+    for i in range(1,39):
+        data = scr_gw_live(i)
+        wr_gw_live(data,i)
 
     print("ending")
 

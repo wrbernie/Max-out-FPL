@@ -3,10 +3,11 @@ from sorters import *
 from writers import *
 
 print("getting Data")
-data = scr_data()
+data = scr_gw_live(38)
 
 print("Making player data")
-wr_player_data(data)
 
-print("IDing Players")
-ID_Players()
+data1 = data["elements"]
+
+print(data1[0]['id'])
+

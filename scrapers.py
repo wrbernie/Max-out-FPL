@@ -16,7 +16,7 @@ def scr_data():
     return data
 
 def scr_team_summary(entry_id):
-    """ Retrieve the summary/history data for a specific entry/team
+    """ Retrieve the gameweek by gameweek summary/history data for a specific entry/team
     Args:
         entry_id (int) : ID of the team whose data is to be retrieved
     """
@@ -32,6 +32,25 @@ def scr_team_summary(entry_id):
         raise Exception("Response was code " + str(response.status_code))
     data = json.loads(response.text)
     return data
+
+def scr_entry_data(entry_id):
+    """Retrieves team/manager info/data for current season
+    
+    Args: Team ID
+    """
+    base_url = "https://fantasy.premierleague.com/api/entry/"
+    full_url = base_url + str(entry_id) + "/"
+    response = ''
+    while response == '':
+        try:
+            response = requests.get(full_url)
+        except:
+            time.sleep(5)
+    if response.status_code != 200:
+        raise Exception("Response was code " + str(response.status_code))
+    data = json.loads(response.text)
+    return data
+
 
 def scr_player_summary(PID):
     """This function scrapes for gw data for an individual player
@@ -54,7 +73,7 @@ def scr_player_summary(PID):
     return(data)
 
 
-def scr_team_gw(teamID,gw):
+def scr_team_picks(teamID,gw):
     """This function scrapes for gw specific data for a specific team.
     
     Args:
@@ -84,7 +103,6 @@ def scr_gw_live(gw):
     """
     base_URL = "https://fantasy.premierleague.com/api/event/"
     full_URL = base_URL + str(gw) + "/live/"
-
     response = ''
     while response == '':
         try:
@@ -119,8 +137,9 @@ def scr_team_transfers(entry_id):
 def main():
 
     ID = 185134
+    gw = 1
     
-    print(scr_team_transfers(ID))
+    print(scr_team_picks(ID,gw))
     
 
 if __name__ == "__main__":
