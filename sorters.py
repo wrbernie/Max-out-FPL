@@ -47,6 +47,10 @@ def ID_Players():
     for line in reader:
         writer.writerow(line)
 
+def sort_livedata(data):
+    """reads in live data for a current week and creates a file for every player in the game
+    """
+
 def main():
     
     ID_Players()

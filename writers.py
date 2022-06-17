@@ -1,5 +1,6 @@
 """These functions will take in text files and creat csv files on a local folder"""
 
+from sys import builtin_module_names
 from scrapers import *
 import csv
 import os
@@ -41,7 +42,7 @@ def wr_gw_live(data,gw):
     """creates a csv for a specific gameweek
     """
     basefolder = os.getcwd() + '/data/seasons/22/gameweeks/'
-    gw_data_df = pd.DataFrame.from_records(data["elements"])
+    gw_data_df = pd.DataFrame.from_records(data)
     gw_data_df.to_csv(os.path.join(basefolder, 'gw' + str(gw) + '.csv'), index = False)
 
 def wr_player_data(data):
@@ -51,14 +52,14 @@ def wr_player_data(data):
     fulldata_df.to_csv(os.path.join(os.getcwd(), 'data/seasons/22/playerdata.csv'))
 
 
+
+
 def main():
     print('starting')
 
-    for i in range(1,39):
-        data = scr_gw_live(i)
-        wr_gw_live(data,i)
+    data = scr_gw_live(1)
 
-    print("ending")
+    print(data["elements"][232])
 
 
 if __name__ == "__main__":

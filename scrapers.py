@@ -135,11 +135,13 @@ def scr_team_transfers(entry_id):
     return data
 
 def main():
+    print("starting script")
 
-    ID = 185134
-    gw = 1
-    
-    print(scr_team_picks(ID,gw))
+    data = scr_player_summary(701)
+
+    print(data["history"])
+
+    print("ending script")
     
 
 if __name__ == "__main__":
