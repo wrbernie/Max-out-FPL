@@ -73,15 +73,15 @@ def scr_player_summary(PID):
     return(data)
 
 
-def scr_team_picks(teamID,gw):
+def scr_team_picks(entry_id,gw):
     """This function scrapes for gw specific data for a specific team.
     
     Args:
-        teamID (int): ID for specific team to be colected.
+    entry_id(int): ID for specific team to be colected.
         gw (int): The desired gameweek
     """
     base_URL = "https://fantasy.premierleague.com/api/entry/"
-    full_URL = base_URL + str(teamID) + "/event/" + str(gw) + "/picks/"
+    full_URL = base_URL + str(entry_id) + "/event/" + str(gw) + "/picks/"
 
     response = ''
     while response == '':
@@ -118,7 +118,7 @@ def scr_team_transfers(entry_id):
     """This function scrapes for a teams transfers throught the season
 
     Args:
-        entry_id (int): The teamID that will be scraped
+        entry_id (int): The(entry_id)that will be scraped
         returns: csv file with player transfers
     """
     base_url = "https://fantasy.premierleague.com/api/entry/"
@@ -134,12 +134,29 @@ def scr_team_transfers(entry_id):
     data = json.loads(response.text)
     return data
 
+def scr_manager_info(entry_id):
+    """Scrapes a team intry and returns profile info
+    """
+    base_url = "https://fantasy.premierleague.com/api/entry/"
+    full_url = base_url + str(entry_id) + "/"
+    response = ''
+    while response == '':
+        try:
+            response = requests.get(full_url)
+        except:
+            time.sleep(5)
+    if response.status_code != 200:
+        raise Exception("Response was code " + str(response.status_code))
+    data = json.loads(response.text)
+    return data
+
+
 def main():
     print("starting script")
 
-    data = scr_player_summary(701)
+    data = scr_manager_info(931343)
 
-    print(data["history"])
+    print(data["player_first_name"])
 
     print("ending script")
     

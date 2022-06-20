@@ -1,6 +1,7 @@
 import csv
 import math
 import os
+import pandas as pd
 from scrapers import *
 
 
@@ -29,7 +30,10 @@ def sort_players(data):
     for player in data:
         w.writerow({k:str(v).encode('utf-8').decode('utf-8') for k, v in player.items()})
 
-
+def expand_picks():
+    basefolder = os.getcwd() + '/data/managers/willie/gameweeks/'
+    picksdf = pd.read_csv(basefolder + 'gw1picks.csv')
+    
 
 def ID_Players():
     """Creates a file that lists Last Name, First Name, and ID within FPL
